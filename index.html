@@ -97,7 +97,7 @@
         <div class="fixed top-0 left-0 w-full bg-red-600 border-b border-red-700 text-white z-50 shadow-md h-10 flex items-center overflow-hidden">
             <div class="marquee-content flex items-center font-bold text-sm tracking-wide">
                 <i data-lucide="megaphone" class="w-4 h-4 mr-2 text-yellow-300"></i>
-                作業忙碌中，訂票及掛帳請耐心等待，嚴禁催促。
+                作業忙碌中，訂票及掛帳請耐心等待，嚴禁催促。｜請提供完整訂票資料以利訂票作業。
             </div>
         </div>
         
@@ -269,12 +269,12 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
                 
                 <!-- Card 5: Pickup Method -->
-                <section class="glass-card rounded-2xl p-5 sm:p-6 shadow-soft transition hover:shadow-lg duration-300 h-full">
+                <section class="glass-card rounded-2xl p-5 sm:p-6 shadow-soft transition hover:shadow-lg duration-300 h-full flex flex-col">
                     <div class="flex items-center mb-4">
                         <i data-lucide="ticket" class="w-5 h-5 text-fuji-600 mr-3"></i>
                         <h2 class="text-lg font-bold tracking-wide text-fuji-800">取票方式</h2>
                     </div>
-                    <ul class="space-y-3">
+                    <ul class="space-y-3 flex-grow">
                         <li class="flex items-center bg-white/90 rounded-lg p-3 shadow-sm border border-fuji-100">
                             <span class="w-8 h-8 rounded-full bg-fuji-100 flex items-center justify-center text-fuji-700 text-xs font-bold mr-3 flex-shrink-0 border border-fuji-200">1</span>
                             <span class="text-gray-800 text-sm font-medium">紙本車票</span>
@@ -294,6 +294,12 @@
                             </div>
                         </li>
                     </ul>
+                    
+                    <!-- Added Note -->
+                    <div class="mt-4 p-3 bg-fuji-50 border border-fuji-200 rounded-lg flex items-start shadow-sm">
+                        <i data-lucide="info" class="w-4 h-4 text-fuji-600 mt-0.5 mr-2 flex-shrink-0"></i>
+                        <p class="text-xs text-fuji-800 font-bold leading-relaxed">同一筆訂位代號僅能一種取票方式</p>
+                    </div>
                 </section>
 
                 <!-- Card 6: Required Info -->
@@ -642,7 +648,7 @@
                             <div class="p-1.5 bg-white rounded-lg shadow-sm mr-3 text-fuji-600 border border-fuji-100 flex-shrink-0">
                                 <i data-lucide="users" class="w-4 h-4"></i>
                             </div>
-                            如有團體票或高鐵假期需求請洽
+                            如有 團體票 或 高鐵假期 需求請洽
                         </div>
                         <div class="flex flex-wrap justify-center sm:justify-end gap-2 text-xs sm:text-sm text-gray-700">
                             <span class="bg-white/80 px-3 py-1.5 rounded-lg border border-fuji-200 hover:border-fuji-400 transition-colors flex items-center shadow-sm">
@@ -650,7 +656,7 @@
                                 <span class="text-fuji-700 font-mono text-[10px] bg-fuji-50 px-1.5 rounded font-medium">#2696</span>
                             </span>
                             <span class="bg-white/80 px-3 py-1.5 rounded-lg border border-fuji-200 hover:border-fuji-400 transition-colors flex items-center shadow-sm">
-                                <span class="font-bold text-gray-800 mr-2">李冠霖經理</span>
+                                <span class="font-bold text-gray-800 mr-2">李冠霖 經理</span>
                                 <span class="text-fuji-700 font-mono text-[10px] bg-fuji-50 px-1.5 rounded font-medium">#2692</span>
                             </span>
                         </div>
@@ -816,4 +822,3 @@
     </script>
 </body>
 </html>
-
