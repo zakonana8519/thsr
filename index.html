@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Tour THSR | 五福旅遊高鐵服務</title>
+    
+    <!-- Google Fonts: Noto Sans TC for that clean Asian typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Vue.js 3 -->
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Configuration for Custom Colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Noto Sans TC"', 'sans-serif'],
+                    },
+                    colors: {
+                        // Custom "Japanese Light Purple" palette
+                        'fuji': {
+                            50: '#fbf7fc', // Background base
+                            100: '#f5eef9',
+                            200: '#ebdaf2',
+                            300: '#dec0e9',
+                            400: '#cba0dd',
+                            500: '#b67ed0', // Primary accent
+                            600: '#9d61b8',
+                            800: '#5e3870', // Text dark accent
+                        },
+                        'sumi': '#4a4a4a', // Soft Charcoal for text (not pure black)
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 20px -2px rgba(214, 192, 233, 0.2)',
+                        'inner-light': 'inset 0 2px 4px 0 rgba(255, 255, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #fbf7fc;
+            color: #4a4a4a;
+            /* Subtle background pattern */
+            background-image: radial-gradient(#dec0e9 0.5px, transparent 0.5px);
+            background-size: 20px 20px;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        /* Custom form select styling */
+        select {
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239d61b8' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 0.5rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+        }
+        /* Hide scrollbar for cleaner look */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fbf7fc; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #dec0e9; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-fuji-200 selection:text-fuji-800">
+
+    <div id="app" class="min-h-screen py-10 px-4 sm:px-6 lg:px-8 flex justify-center">
+        
+        <!-- Main Container -->
+        <main class="w-full max-w-3xl space-y-5">
+            
+            <!-- Header Section -->
+            <header class="text-center space-y-2 mb-8 animate-fade-in-up">
+                <div class="inline-block p-3 rounded-full bg-white shadow-soft mb-3">
+                    <i data-lucide="train-front" class="w-8 h-8 text-fuji-500"></i>
+                </div>
+                <h1 class="text-3xl font-light tracking-widest text-fuji-800">Life Tour THSR</h1>
+                <div class="h-px w-12 bg-fuji-300 mx-auto my-3"></div>
+                <p class="text-xs tracking-wide text-gray-500">五福旅遊台灣高鐵訂票服務（內部人員使用）</p>
+            </header>
+
+            <!-- Card 1: Service Time & Important Notice -->
+            <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300">
+                <div class="flex items-center mb-4">
+                    <i data-lucide="clock" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                    <h2 class="text-lg font-medium tracking-wide text-fuji-800">票務服務時間</h2>
+                </div>
+                
+                <div class="pl-8 border-l-2 border-fuji-100">
+                    <p class="text-base text-gray-600">週一至週五 <span class="font-medium text-fuji-600 font-mono">08:40－18:00</span></p>
+                    <p class="text-xs text-gray-400 mt-1">（不含例假日及國定假日）</p>
+                </div>
+            </section>
+
+            <!-- Card 2: Processing Time -->
+            <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300">
+                <div class="flex items-center mb-4">
+                    <i data-lucide="calendar-clock" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                    <h2 class="text-lg font-medium tracking-wide text-fuji-800">作業時間與說明</h2>
+                </div>
+
+                <!-- Moved Important Rule -->
+                <div class="mb-4 space-y-2">
+                     <div class="bg-red-50/80 border border-red-100 rounded-lg p-3 flex items-center gap-3">
+                         <i data-lucide="alert-circle" class="w-4 h-4 text-red-500 flex-shrink-0"></i>
+                         <p class="text-sm text-red-600 font-bold tracking-widest">【 恕不接急單 】</p>
+                    </div>
+                    <div class="bg-fuji-50/80 border border-fuji-100 rounded-lg p-3 flex items-center gap-3">
+                         <i data-lucide="info" class="w-4 h-4 text-fuji-500 flex-shrink-0"></i>
+                         <p class="text-sm text-fuji-800 font-medium">【 優待票須至少搭配一張全票，方可辦理訂票 】</p>
+                    </div>
+                </div>
+
+                <div class="space-y-4 pl-2 mb-4">
+                    <div v-for="(item, index) in processingRules" :key="index" class="flex items-center group">
+                        <div class="w-1.5 h-1.5 rounded-full bg-fuji-300 mr-4 group-hover:bg-fuji-500 transition-colors flex-shrink-0"></div>
+                        <div class="flex-1 flex justify-between items-center">
+                            <span class="text-sm text-gray-700">{{ item.label }}</span>
+                            <span class="text-sm text-fuji-600 font-medium">{{ item.time }}</span>
+                        </div>
+                    </div>
+
+                    <!-- New Rule: Peak Period -->
+                    <div class="flex items-start group">
+                        <div class="w-1.5 h-1.5 rounded-full bg-fuji-300 mt-2 mr-4 group-hover:bg-fuji-500 transition-colors flex-shrink-0"></div>
+                        <div class="flex-1">
+                            <span class="block text-sm text-gray-700 mb-1">疏運期間 <span class="text-xs text-gray-400 font-normal">(如國定假日、連續假期等)</span></span>
+                            <div class="bg-fuji-50/50 rounded-lg p-3 border border-fuji-100/50">
+                                <p class="text-sm text-fuji-600 font-medium mb-1.5 leading-relaxed">請於高鐵開賣前 3 個工作天告知，並提供需求班次順位 (至少 3 個)。</p>
+                                <div class="flex items-start gap-1.5">
+                                    <i data-lucide="alert-circle" class="w-3 h-3 text-gray-400 mt-0.5 flex-shrink-0"></i>
+                                    <p class="text-[11px] text-gray-400 leading-relaxed">將於上班時間訂票作業，實際依作業送出為準，恕無法保證一定有票。</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <p class="text-xs text-center text-gray-400 mt-2 mb-6 pt-2">
+                    （以上作業時間皆以工作日計算，不含假日）
+                </p>
+
+                <!-- Merged Seat Rules Section -->
+                <div class="border-t border-fuji-100 pt-5">
+                    <h3 class="text-sm font-medium text-fuji-800 mb-3 flex items-center">
+                        <i data-lucide="armchair" class="w-4 h-4 mr-2 text-fuji-500"></i>
+                        劃位與訂位規則
+                    </h3>
+                    <ul class="space-y-2 pl-2">
+                        <li v-for="(rule, idx) in seatRules" :key="idx" class="flex items-start text-sm text-gray-600">
+                            <i data-lucide="check" class="w-4 h-4 text-fuji-300 mr-3 mt-0.5 flex-shrink-0"></i>
+                            {{ rule }}
+                        </li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- New Section: Booking Process Flow -->
+            <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300">
+                <div class="flex items-center mb-6">
+                    <i data-lucide="route" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                    <h2 class="text-lg font-medium tracking-wide text-fuji-800">訂票作業流程</h2>
+                </div>
+                
+                <div class="relative px-2">
+                    <!-- Connecting Line (Desktop) -->
+                    <div class="hidden md:block absolute top-5 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-fuji-100 via-fuji-200 to-fuji-100 -z-10"></div>
+                    
+                    <div class="flex flex-col md:flex-row justify-between gap-8 md:gap-0">
+                        <!-- Step 1 -->
+                        <div class="flex flex-col items-center text-center group flex-1">
+                            <div class="w-10 h-10 rounded-full bg-white border-2 border-fuji-200 flex items-center justify-center text-fuji-500 mb-3 group-hover:border-fuji-500 group-hover:text-fuji-600 group-hover:scale-110 transition-all shadow-sm z-10 relative">
+                                <i data-lucide="file-text" class="w-5 h-5"></i>
+                                <!-- Mobile Connector -->
+                                <div class="md:hidden absolute h-10 w-0.5 bg-fuji-100 -bottom-11 left-1/2 -translate-x-1/2"></div>
+                            </div>
+                            <h3 class="text-sm font-bold text-gray-700 mb-1">提供資料</h3>
+                            <span class="text-[10px] text-fuji-500 bg-fuji-50 px-2 py-0.5 rounded-full font-medium">Step 1</span>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex flex-col items-center text-center group flex-1">
+                            <div class="w-10 h-10 rounded-full bg-white border-2 border-fuji-200 flex items-center justify-center text-fuji-500 mb-3 group-hover:border-fuji-500 group-hover:text-fuji-600 group-hover:scale-110 transition-all shadow-sm z-10 relative">
+                                <i data-lucide="monitor-check" class="w-5 h-5"></i>
+                                <!-- Mobile Connector -->
+                                <div class="md:hidden absolute h-10 w-0.5 bg-fuji-100 -bottom-11 left-1/2 -translate-x-1/2"></div>
+                            </div>
+                            <h3 class="text-sm font-bold text-gray-700 mb-1">開票</h3>
+                            <span class="text-[10px] text-fuji-500 bg-fuji-50 px-2 py-0.5 rounded-full font-medium">Step 2</span>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex flex-col items-center text-center group flex-1">
+                             <div class="w-10 h-10 rounded-full bg-white border-2 border-fuji-200 flex items-center justify-center text-fuji-500 mb-3 group-hover:border-fuji-500 group-hover:text-fuji-600 group-hover:scale-110 transition-all shadow-sm z-10 relative">
+                                <i data-lucide="file-check" class="w-5 h-5"></i>
+                                <!-- Mobile Connector -->
+                                <div class="md:hidden absolute h-10 w-0.5 bg-fuji-100 -bottom-11 left-1/2 -translate-x-1/2"></div>
+                            </div>
+                            <h3 class="text-sm font-bold text-gray-700 mb-1">出票</h3>
+                            <span class="text-[10px] text-fuji-500 bg-fuji-50 px-2 py-0.5 rounded-full font-medium">Step 3</span>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flex flex-col items-center text-center group flex-1">
+                             <div class="w-10 h-10 rounded-full bg-white border-2 border-fuji-200 flex items-center justify-center text-fuji-500 mb-3 group-hover:border-fuji-500 group-hover:text-fuji-600 group-hover:scale-110 transition-all shadow-sm z-10">
+                                <i data-lucide="ticket" class="w-5 h-5"></i>
+                            </div>
+                            <h3 class="text-sm font-bold text-gray-700 mb-1">取票</h3>
+                            <span class="text-[10px] text-fuji-500 bg-fuji-50 px-2 py-0.5 rounded-full font-medium">Step 4</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Section: Refund Policy -->
+            <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300">
+                <div class="flex items-center mb-6">
+                    <i data-lucide="undo-2" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                    <h2 class="text-lg font-medium tracking-wide text-fuji-800">退票規則與說明</h2>
+                </div>
+
+                <div class="space-y-5">
+                    <!-- Main Requirements -->
+                    <div class="bg-fuji-50/50 rounded-xl p-4 border border-fuji-100 flex flex-col sm:flex-row gap-4">
+                         <div class="flex-1 flex items-start">
+                            <span class="bg-fuji-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mt-0.5 mr-2 flex-shrink-0">期限</span>
+                            <div class="text-sm text-gray-700">
+                                請於 <span class="text-fuji-600 font-bold border-b border-fuji-200">4 個工作日前</span> 提出申請
+                                <p class="text-[10px] text-gray-400 mt-0.5">（天災導致高鐵停駛者不在此限）</p>
+                            </div>
+                        </div>
+                        <div class="flex-1 flex items-start border-t sm:border-t-0 sm:border-l border-fuji-200 pt-3 sm:pt-0 sm:pl-4">
+                             <span class="bg-fuji-500 text-white text-[10px] px-2 py-0.5 rounded-full font-bold mt-0.5 mr-2 flex-shrink-0">費用</span>
+                             <p class="text-sm text-gray-700">退票將酌收手續費 <span class="text-fuji-600 font-bold">每張 NT$ 50</span></p>
+                        </div>
+                    </div>
+
+                    <!-- Process Requirement -->
+                    <div class="pl-2">
+                        <div class="flex items-start">
+                            <i data-lucide="file-warning" class="w-4 h-4 text-fuji-400 mt-1 mr-3 flex-shrink-0"></i>
+                            <div class="text-sm text-gray-600 leading-relaxed">
+                                <span class="block text-gray-800 font-medium mb-1">辦理退票必備文件</span>
+                                請務必提供 <span class="font-medium text-fuji-700">紙本票根</span> 或 <span class="font-medium text-fuji-700">APP 電子票截圖</span>。<br>
+                                <span class="text-xs text-red-400 mt-1 block">※ 未提供者將視同正常搭乘，相關費用須自行負擔。</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Warnings / Exceptions -->
+                    <div class="mt-4 pt-4 border-t border-fuji-100">
+                        <div class="bg-red-50/60 rounded-lg p-4 border border-red-100/50">
+                            <h4 class="text-xs font-bold text-red-500 mb-2 flex items-center">
+                                <i data-lucide="alert-triangle" class="w-3.5 h-3.5 mr-1.5"></i>
+                                無法退票或改期之情形
+                            </h4>
+                            <ul class="text-xs text-gray-600 space-y-2 list-disc list-inside">
+                                <li>
+                                    <span class="text-gray-800 font-medium">逾期作廢：</span>
+                                    車票須於搭乘當日使用，逾期視同廢票，恕不受理退票。
+                                </li>
+                                <li>
+                                    <span class="text-gray-800 font-medium">逾時未搭乘：</span>
+                                    請自行洽詢站務人員改搭當日其他車次之自由座，恕無法辦理退票。
+                                </li>
+                                <li>
+                                    <span class="text-gray-800 font-medium">非高鐵因素：</span>
+                                    因航班延誤或取消等因素致無法搭乘者，恕無法改期或退票，敬請見諒。
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Grid Layout for Pickup & Info -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                
+                <!-- Card 4: Pickup Method -->
+                <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300 h-full">
+                    <div class="flex items-center mb-4">
+                        <i data-lucide="ticket" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                        <h2 class="text-lg font-medium tracking-wide text-fuji-800">取票方式</h2>
+                    </div>
+                    <ul class="space-y-2.5">
+                        <li class="flex items-center bg-white/80 rounded-lg p-2.5 shadow-sm border border-fuji-50">
+                            <span class="w-6 h-6 rounded-full bg-fuji-50 flex items-center justify-center text-fuji-600 text-xs font-bold mr-3">1</span>
+                            <span class="text-gray-700 text-sm">紙本車票</span>
+                        </li>
+                        <li class="flex items-center bg-white/80 rounded-lg p-2.5 shadow-sm border border-fuji-50">
+                            <span class="w-6 h-6 rounded-full bg-fuji-50 flex items-center justify-center text-fuji-600 text-xs font-bold mr-3">2</span>
+                            <div class="flex flex-col">
+                                <span class="text-gray-700 text-sm">電子車票</span>
+                                <span class="text-xs font-bold text-fuji-600 mt-0.5">需使用臺灣高鐵 App</span>
+                            </div>
+                        </li>
+                        <li class="flex items-center bg-white/80 rounded-lg p-2.5 shadow-sm border border-fuji-50">
+                            <span class="w-6 h-6 rounded-full bg-fuji-50 flex items-center justify-center text-fuji-600 text-xs font-bold mr-3">3</span>
+                            <div class="flex flex-col">
+                                <span class="text-gray-700 text-sm">超商取票</span>
+                                <span class="text-xs font-bold text-fuji-600 mt-0.5">手續費由旅客負擔</span>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+
+                <!-- Card 5: Required Info (Redesigned) -->
+            <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300 h-full">
+                <div class="flex items-center mb-4">
+                    <i data-lucide="clipboard-list" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                    <h2 class="text-lg font-medium tracking-wide text-fuji-800">訂票所需資料</h2>
+                </div>
+
+                <div class="space-y-4">
+                    <!-- Basic Info Grid -->
+                    <div class="grid grid-cols-2 gap-2">
+                        <div class="bg-white/60 p-2.5 rounded-lg border border-fuji-50 flex items-center justify-center flex-col text-center">
+                            <span class="text-xs text-fuji-400 mb-1">Date</span>
+                            <span class="text-sm text-gray-700 font-medium">搭乘日期</span>
+                        </div>
+                        <div class="bg-white/60 p-2.5 rounded-lg border border-fuji-50 flex items-center justify-center flex-col text-center">
+                            <span class="text-xs text-fuji-400 mb-1">Station</span>
+                            <span class="text-sm text-gray-700 font-medium">起訖車站</span>
+                        </div>
+                        <div class="bg-white/60 p-2.5 rounded-lg border border-fuji-50 flex items-center justify-center flex-col text-center">
+                            <span class="text-xs text-fuji-400 mb-1">No.</span>
+                            <span class="text-sm text-gray-700 font-medium">搭乘班次</span>
+                        </div>
+                        <div class="bg-white/60 p-2.5 rounded-lg border border-fuji-50 flex items-center justify-center flex-col text-center">
+                            <span class="text-xs text-fuji-400 mb-1">Count</span>
+                            <span class="text-sm text-gray-700 font-medium">票種張數</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Passenger Details List -->
+                    <div class="bg-fuji-50/50 rounded-xl p-3 border border-fuji-100">
+                        <h4 class="text-[11px] font-bold text-fuji-600 mb-2 flex items-center tracking-wider uppercase">
+                            <i data-lucide="user-check" class="w-3 h-3 mr-1"></i>
+                            旅客個資需求
+                        </h4>
+                        <ul class="space-y-2">
+                            <li class="flex flex-col border-b border-fuji-200/50 pb-2 last:border-0 last:pb-0">
+                                <span class="text-xs font-bold text-gray-700 mb-0.5">全票</span>
+                                <span class="text-xs text-gray-500">姓名、身分證字號</span>
+                            </li>
+                            <li class="flex flex-col border-b border-fuji-200/50 pb-2 last:border-0 last:pb-0">
+                                <span class="text-xs font-bold text-gray-700 mb-0.5">優待票 <span class="font-normal text-gray-400">(孩童/敬老)</span></span>
+                                <span class="text-xs text-gray-500">姓名、身分證字號、出生年月日</span>
+                            </li>
+                            <li class="flex flex-col">
+                                <span class="text-xs font-bold text-gray-700 mb-0.5">優待票 <span class="font-normal text-gray-400">(愛心/陪同)</span></span>
+                                <span class="text-xs text-gray-500">姓名、身分證字號、身心障礙手冊正反面影本</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+            <!-- New Section: Interactive Pricing Tool (Redesigned) -->
+            <section class="glass-card rounded-2xl overflow-hidden shadow-soft transition hover:shadow-lg duration-300 border border-white/60">
+                <!-- Header -->
+                <div class="bg-gradient-to-r from-fuji-100/50 to-transparent p-6 border-b border-fuji-100">
+                    <div class="flex items-center">
+                        <div class="p-2 bg-white rounded-lg shadow-sm mr-3">
+                            <i data-lucide="calculator" class="w-5 h-5 text-fuji-500"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg font-medium tracking-wide text-fuji-800">票價試算工具</h2>
+                            <p class="text-xs text-fuji-400">即時查詢票價與業務折扣計算</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="p-6 space-y-8">
+                    <!-- Part 1: Query Interface -->
+                    <div>
+                        <!-- Station Selectors -->
+                        <div class="relative flex flex-col sm:flex-row items-center justify-between gap-4 bg-fuji-50/50 p-4 rounded-2xl border border-fuji-100">
+                            <!-- Start Station -->
+                            <div class="w-full relative group">
+                                <label class="block text-[10px] font-bold text-fuji-400 uppercase tracking-wider mb-1 ml-1">From</label>
+                                <select v-model="query.start" class="w-full bg-white border-0 ring-1 ring-fuji-100 text-gray-700 font-medium py-3 px-4 pr-8 rounded-xl focus:ring-2 focus:ring-fuji-300 transition-all cursor-pointer hover:shadow-sm text-lg">
+                                    <option v-for="station in stations" :value="station.name">{{ station.name }}</option>
+                                </select>
+                            </div>
+
+                            <!-- Swap Button -->
+                            <button @click="swapStations" class="z-10 p-2.5 rounded-full bg-white text-fuji-500 shadow-sm border border-fuji-100 hover:bg-fuji-500 hover:text-white hover:border-fuji-500 hover:shadow-md transition-all duration-300 transform hover:rotate-180 flex-shrink-0 sm:mt-5">
+                                <i data-lucide="arrow-left-right" class="w-4 h-4"></i>
+                            </button>
+
+                            <!-- End Station -->
+                            <div class="w-full relative group">
+                                <label class="block text-[10px] font-bold text-fuji-400 uppercase tracking-wider mb-1 ml-1">To</label>
+                                <select v-model="query.end" class="w-full bg-white border-0 ring-1 ring-fuji-100 text-gray-700 font-medium py-3 px-4 pr-8 rounded-xl focus:ring-2 focus:ring-fuji-300 transition-all cursor-pointer hover:shadow-sm text-lg">
+                                    <option v-for="station in stations" :value="station.name">{{ station.name }}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Toggles & Price Result -->
+                        <div class="mt-6 flex flex-col sm:flex-row gap-6">
+                            <!-- Left: Options -->
+                            <div class="flex-1 space-y-4 flex flex-col justify-center">
+                                <!-- Car Type Toggle -->
+                                <div>
+                                    <span class="text-xs text-gray-400 mb-1.5 block ml-1">車廂等級</span>
+                                    <div class="bg-fuji-50 p-1 rounded-full flex relative">
+                                        <button 
+                                            @click="query.carType = 'standard'"
+                                            class="flex-1 py-1.5 text-xs rounded-full transition-all duration-300 relative z-10 font-medium"
+                                            :class="query.carType === 'standard' ? 'text-white' : 'text-gray-500 hover:text-gray-700'">
+                                            標準車廂
+                                        </button>
+                                        <button 
+                                            @click="query.carType = 'business'"
+                                            class="flex-1 py-1.5 text-xs rounded-full transition-all duration-300 relative z-10 font-medium"
+                                            :class="query.carType === 'business' ? 'text-white' : 'text-gray-500 hover:text-gray-700'">
+                                            商務車廂
+                                        </button>
+                                        <!-- Animated Background Pill -->
+                                        <div class="absolute top-1 bottom-1 rounded-full bg-fuji-500 transition-all duration-300 shadow-sm"
+                                             :class="query.carType === 'standard' ? 'left-1 w-[calc(50%-4px)]' : 'left-[50%] w-[calc(50%-4px)]'">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Ticket Type Toggle -->
+                                <div>
+                                    <div class="flex justify-between items-end mb-1.5">
+                                        <span class="text-xs text-gray-400 ml-1">票種選擇</span>
+                                        <button @click="showTicketInfo = !showTicketInfo" class="text-[10px] text-fuji-500 hover:text-fuji-700 flex items-center transition-colors">
+                                            <i data-lucide="info" class="w-3 h-3 mr-1"></i>
+                                            {{ showTicketInfo ? '收合說明' : '票種說明' }}
+                                        </button>
+                                    </div>
+                                    <div class="bg-fuji-50 p-1 rounded-full flex relative">
+                                        <button 
+                                            @click="query.ticketType = 'adult'"
+                                            class="flex-1 py-1.5 text-xs rounded-full transition-all duration-300 relative z-10 font-medium"
+                                            :class="query.ticketType === 'adult' ? 'text-white' : 'text-gray-500 hover:text-gray-700'">
+                                            全票
+                                        </button>
+                                        <button 
+                                            @click="query.ticketType = 'concession'"
+                                            class="flex-1 py-1.5 text-xs rounded-full transition-all duration-300 relative z-10 font-medium"
+                                            :class="query.ticketType === 'concession' ? 'text-white' : 'text-gray-500 hover:text-gray-700'">
+                                            優待票
+                                        </button>
+                                        <!-- Animated Background Pill -->
+                                        <div class="absolute top-1 bottom-1 rounded-full bg-fuji-400 transition-all duration-300 shadow-sm"
+                                             :class="query.ticketType === 'adult' ? 'left-1 w-[calc(50%-4px)]' : 'left-[50%] w-[calc(50%-4px)]'">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Right: Price Display -->
+                            <div class="flex-1 bg-white border border-fuji-100 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-inner relative overflow-hidden group">
+                                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-fuji-300 to-fuji-500 transform origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-500"></div>
+                                
+                                <span class="text-[10px] text-fuji-400 uppercase tracking-widest font-bold mb-1">Estimated Fare</span>
+                                
+                                <div v-if="query.start === query.end" class="text-fuji-300 py-2 animate-pulse">
+                                    <span class="text-sm">請選擇不同車站</span>
+                                </div>
+                                <div v-else class="flex items-baseline text-fuji-800 scale-110 transform transition-transform">
+                                    <span class="text-xl font-light mr-1 text-fuji-400">$</span>
+                                    <span class="text-5xl font-mono font-bold tracking-tighter">{{ formattedCalculatedPrice }}</span>
+                                </div>
+                                
+                                <div class="mt-2 flex gap-2">
+                                     <span class="text-[10px] bg-fuji-50 text-fuji-600 px-2 py-0.5 rounded border border-fuji-100">{{ getCarTypeName }}</span>
+                                     <span class="text-[10px] bg-fuji-50 text-fuji-600 px-2 py-0.5 rounded border border-fuji-100">{{ getTicketTypeName }}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Ticket Type Info Section (Collapsible) -->
+                        <div v-if="showTicketInfo" class="mt-4 bg-white/80 rounded-xl p-4 border border-fuji-100 animate-fade-in-down shadow-sm">
+                            <h4 class="text-xs font-bold text-fuji-800 mb-3 flex items-center border-b border-fuji-100 pb-2">
+                                <i data-lucide="book-open" class="w-3.5 h-3.5 mr-2 text-fuji-500"></i>
+                                票種適用對象說明
+                            </h4>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
+                                <!-- Adult -->
+                                <div class="space-y-1">
+                                    <span class="text-xs font-bold text-fuji-600 bg-fuji-50 px-2 py-0.5 rounded inline-block">全票</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed">
+                                        年滿 12 歲以上之旅客應購買全票。
+                                    </p>
+                                </div>
+
+                                <!-- Senior -->
+                                <div class="space-y-1">
+                                    <span class="text-xs font-bold text-fuji-600 bg-fuji-50 px-2 py-0.5 rounded inline-block">敬老票 (優待)</span>
+                                    <p class="text-xs text-gray-600 leading-relaxed">
+                                        年滿 65 歲以上之國民（以乘車當日為準），持有國民身分證或政府核發附有照片、身分證字號及出生年、月、日等足以證明身分之證件者。
+                                    </p>
+                                </div>
+
+                                <!-- Child -->
+                                <div class="space-y-1">
+                                    <span class="text-xs font-bold text-fuji-600 bg-fuji-50 px-2 py-0.5 rounded inline-block">孩童票 (優待)</span>
+                                    <ul class="text-xs text-gray-600 list-disc list-inside leading-relaxed space-y-0.5">
+                                        <li>未滿 12 歲之兒童。</li>
+                                        <li>身高未滿 115 公分不佔位者免票 (每位旅客限帶2人)。</li>
+                                        <li>身高超過 150 公分但未滿 12 歲，或超過 115 公分但未滿 6 歲者，應出示身分證明。</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Disabled -->
+                                <div class="space-y-1">
+                                    <span class="text-xs font-bold text-fuji-600 bg-fuji-50 px-2 py-0.5 rounded inline-block">愛心 / 陪同票 (優待)</span>
+                                    <ul class="text-xs text-gray-600 list-disc list-inside leading-relaxed space-y-0.5">
+                                        <li>持有身心障礙證明之國民。</li>
+                                        <li>註記有「必要陪伴者優惠措施」者，限一位陪伴者享有優惠，且須同車次、同車廂。</li>
+                                    </ul>
+                                </div>
+
+                                <!-- Group Ticket (New Added) -->
+                                <div class="space-y-1">
+                                    <span class="text-xs font-bold text-fuji-600 bg-fuji-50 px-2 py-0.5 rounded inline-block">團體票</span>
+                                    <ul class="text-xs text-gray-600 list-disc list-inside leading-relaxed space-y-0.5">
+                                        <li>11 人（含）以上之團體。</li>
+                                        <li>起訖站、搭乘日期及車次需相同。</li>
+                                        <li>全票旅客佔總人數之比例，得視個案情況調整。</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Divider -->
+                    <div class="relative flex items-center py-2">
+                        <div class="flex-grow border-t border-dashed border-fuji-200"></div>
+                        <span class="flex-shrink-0 mx-4 text-xs text-fuji-300 bg-white px-2 rounded-full border border-fuji-100">或使用</span>
+                        <div class="flex-grow border-t border-dashed border-fuji-200"></div>
+                    </div>
+
+                    <!-- Part 2: Discount Calculator -->
+                    <div class="bg-gradient-to-br from-fuji-50/80 to-white rounded-2xl p-5 border border-fuji-100">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-sm font-bold text-fuji-800 flex items-center">
+                                <span class="w-1.5 h-1.5 bg-fuji-500 rounded-full mr-2"></span>
+                                業務折扣計算機
+                            </h3>
+                            <button 
+                                v-if="calculatedPriceVal > 0" 
+                                @click="copyPriceToCalculator" 
+                                class="group flex items-center text-[10px] bg-white text-fuji-500 px-3 py-1.5 rounded-full border border-fuji-200 hover:border-fuji-400 hover:text-fuji-600 transition-all shadow-sm active:scale-95">
+                                <span class="mr-1">帶入上方票價</span>
+                                <i data-lucide="arrow-down" class="w-3 h-3 group-hover:translate-y-0.5 transition-transform"></i>
+                            </button>
+                        </div>
+
+                        <!-- Discount Rules Info (New Added) -->
+                        <div class="mb-5 bg-white/60 rounded-xl p-3 border border-fuji-100 shadow-sm relative overflow-hidden">
+                             <div class="absolute left-0 top-0 w-1 h-full bg-fuji-300"></div>
+                             <h4 class="text-xs font-bold text-fuji-700 mb-2 flex items-center pl-2">
+                                <i data-lucide="percent" class="w-3.5 h-3.5 mr-1.5"></i>
+                                訂票折扣說明
+                            </h4>
+                            <div class="pl-2 flex flex-wrap gap-2 text-xs text-gray-600 mb-2">
+                                <span class="inline-flex items-center bg-white px-2 py-1 rounded border border-fuji-100 shadow-sm">
+                                    <span class="text-gray-500 mr-1">普通車廂</span>
+                                    <span class="font-bold text-fuji-600">全票 85 折</span>
+                                </span>
+                                <span class="inline-flex items-center bg-white px-2 py-1 rounded border border-fuji-100 shadow-sm">
+                                    <span class="text-gray-500 mr-1">商務車廂</span>
+                                    <span class="font-bold text-fuji-600">9 折</span>
+                                </span>
+                                <span class="inline-flex items-center bg-white px-2 py-1 rounded border border-fuji-100 shadow-sm">
+                                    <span class="text-gray-500 mr-1">優待票</span>
+                                    <span class="font-bold text-fuji-600">一律半價</span>
+                                </span>
+                            </div>
+                            <p class="pl-2 text-[10px] text-fuji-400 flex items-center pt-1 border-t border-fuji-100/50 mt-1">
+                                <i data-lucide="info" class="w-3 h-3 mr-1"></i>
+                                業務請自行計算要給客人的折扣 (全票最低 85 折)
+                            </p>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <!-- Inputs -->
+                            <div class="flex-1 space-y-3">
+                                <div class="relative">
+                                    <label class="absolute -top-2 left-2 px-1 bg-white/0 text-[10px] text-fuji-400 font-bold backdrop-blur-sm">金額</label>
+                                    <input 
+                                        type="number" 
+                                        v-model.number="calc.amount" 
+                                        placeholder="0"
+                                        class="w-full bg-white border border-fuji-200 rounded-xl py-2.5 pl-8 pr-4 text-gray-700 text-sm focus:outline-none focus:border-fuji-400 focus:ring-2 focus:ring-fuji-100 transition-all shadow-sm font-mono">
+                                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">$</span>
+                                </div>
+                                
+                                <div class="relative">
+                                    <label class="absolute -top-2 left-2 px-1 bg-white/0 text-[10px] text-fuji-400 font-bold backdrop-blur-sm">折扣 (%)</label>
+                                    <input 
+                                        type="number" 
+                                        v-model.number="calc.rate" 
+                                        placeholder="100" 
+                                        class="w-full bg-white border border-fuji-200 rounded-xl py-2.5 px-4 text-gray-700 text-sm focus:outline-none focus:border-fuji-400 focus:ring-2 focus:ring-fuji-100 transition-all shadow-sm font-mono">
+                                    <div class="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none">
+                                        <span class="text-[10px] text-fuji-600 bg-fuji-100 px-2 py-0.5 rounded-md font-medium">{{ discountText }}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Result Box -->
+                            <div class="sm:w-1/3 bg-fuji-600 rounded-xl p-4 flex flex-col justify-between text-white shadow-lg relative overflow-hidden">
+                                <!-- Decorative circle -->
+                                <div class="absolute -right-6 -top-6 w-16 h-16 bg-white opacity-10 rounded-full"></div>
+                                <div class="absolute -left-2 -bottom-2 w-10 h-10 bg-white opacity-10 rounded-full"></div>
+
+                                <span class="text-xs font-medium text-fuji-100 relative z-10">折後金額</span>
+                                <div class="flex items-end justify-end relative z-10 mt-2">
+                                    <span class="text-sm mr-1.5 opacity-80 mb-1">$</span>
+                                    <span class="text-3xl font-mono font-bold tracking-tight">{{ discountResult }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- New Section: Contact Info -->
+            <section class="glass-card rounded-2xl p-6 shadow-soft transition hover:shadow-lg duration-300">
+                <div class="flex items-center mb-4">
+                    <i data-lucide="headset" class="w-5 h-5 text-fuji-500 mr-3"></i>
+                    <h2 class="text-lg font-medium tracking-wide text-fuji-800">服務窗口</h2>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <!-- North -->
+                    <div class="flex items-center bg-fuji-50/50 rounded-xl p-4 border border-fuji-100 group hover:border-fuji-300 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-fuji-600 font-bold shadow-sm mr-4 text-sm border border-fuji-50">北區</div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="text-sm font-medium text-gray-800">卓芷伶</span>
+                                <span class="text-xs text-fuji-600 font-mono tracking-wider">Ext. 2696</span>
+                            </div>
+                            <div class="text-xs text-gray-500 flex items-center">
+                                <span class="bg-white border border-fuji-100 text-gray-400 px-1.5 py-0.5 rounded text-[10px] mr-2">代理</span>
+                                陳侑君
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- South -->
+                    <div class="flex items-center bg-fuji-50/50 rounded-xl p-4 border border-fuji-100 group hover:border-fuji-300 transition-colors">
+                        <div class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-fuji-600 font-bold shadow-sm mr-4 text-sm border border-fuji-50">南區</div>
+                        <div class="flex-1">
+                            <div class="flex justify-between items-baseline mb-1">
+                                <span class="text-sm font-medium text-gray-800">陳侑君</span>
+                                <span class="text-xs text-fuji-600 font-mono tracking-wider">Ext. 7859</span>
+                            </div>
+                            <div class="text-xs text-gray-500 flex items-center">
+                                <span class="bg-white border border-fuji-100 text-gray-400 px-1.5 py-0.5 rounded text-[10px] mr-2">代理</span>
+                                卓芷伶
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Group / Holiday Requests -->
+                <div class="mt-4 pt-4 border-t border-fuji-100">
+                    <div class="bg-gradient-to-r from-fuji-50/80 to-white rounded-xl p-4 border border-fuji-100 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left shadow-sm">
+                        <div class="flex items-center text-sm font-medium text-fuji-800">
+                            <div class="p-1.5 bg-white rounded-lg shadow-sm mr-3 text-fuji-500 border border-fuji-50">
+                                <i data-lucide="users" class="w-4 h-4"></i>
+                            </div>
+                            如有團體票或高鐵假期需求請洽
+                        </div>
+                        <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-3 text-xs sm:text-sm text-gray-600">
+                            <span class="bg-white/80 px-3 py-1.5 rounded-lg border border-fuji-100 hover:border-fuji-300 transition-colors flex items-center shadow-sm">
+                                <span class="font-medium text-gray-700 mr-2">卓芷伶</span>
+                                <span class="text-fuji-600 font-mono text-[10px] bg-fuji-50 px-1.5 rounded">#2696</span>
+                            </span>
+                            <span class="bg-white/80 px-3 py-1.5 rounded-lg border border-fuji-100 hover:border-fuji-300 transition-colors flex items-center shadow-sm">
+                                <span class="font-medium text-gray-700 mr-2">李冠霖經理</span>
+                                <span class="text-fuji-600 font-mono text-[10px] bg-fuji-50 px-1.5 rounded">#2692</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer class="text-center py-8">
+                <p class="text-xs text-gray-400 tracking-wider">© Life Tour Co., Ltd. Internal Use Only.</p>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        const { createApp } = Vue;
+
+        createApp({
+            data() {
+                return {
+                    processingRules: [
+                        { label: '訂票作業繁忙時', time: '於 3 個工作天內完成' },
+                        { label: '員工訂票', time: '須於搭乘日前 2 個工作天提出申請' },
+                        { label: '團體訂票', time: '須於搭乘日前 5 個工作天提出申請' }
+                    ],
+                    seatRules: [
+                        '座位皆由電腦自動劃位，恕無法指定座位，亦無法保證同行者可安排相鄰座位。',
+                        '一筆訂位代號最多 10 位旅客。',
+                        '不同起訖點為獨立一個訂位代號。',
+                        '若因逾時未能搭乘，請自行洽詢站務人員是否可改搭當日其他車次之自由座，恕無法辦理退票。',
+                        '自 114 年 11 月 10 日起「不可提早搭乘」。'
+                    ],
+                    // Interactive Query Data
+                    stations: [
+                        { name: '台北', std: 0, biz: 0 },
+                        { name: '板橋', std: 40, biz: 260 },
+                        { name: '桃園', std: 160, biz: 440 },
+                        { name: '新竹', std: 290, biz: 640 },
+                        { name: '苗栗', std: 430, biz: 850 },
+                        { name: '台中', std: 700, biz: 1250 },
+                        { name: '彰化', std: 820, biz: 1430 },
+                        { name: '雲林', std: 930, biz: 1600 },
+                        { name: '嘉義', std: 1080, biz: 1820 },
+                        { name: '台南', std: 1350, biz: 2230 },
+                        { name: '左營', std: 1490, biz: 2440 }
+                    ],
+                    query: {
+                        start: '台北',
+                        end: '左營',
+                        carType: 'standard', // standard, business
+                        ticketType: 'adult' // adult, concession
+                    },
+                    showTicketInfo: false, // New state for toggling info
+                    // Discount Calculator Data
+                    calc: {
+                        amount: '',
+                        rate: 100
+                    }
+                }
+            },
+            computed: {
+                getCarTypeName() {
+                    return this.query.carType === 'standard' ? '標準車廂' : '商務車廂';
+                },
+                getTicketTypeName() {
+                    return this.query.ticketType === 'adult' ? '全票' : '優待票';
+                },
+                // Return Number for Logic
+                calculatedPriceVal() {
+                    if (this.query.start === this.query.end) return 0;
+
+                    const startStation = this.stations.find(s => s.name === this.query.start);
+                    const endStation = this.stations.find(s => s.name === this.query.end);
+                    
+                    if (!startStation || !endStation) return 0;
+
+                    let basePrice = 0;
+                    
+                    if (this.query.carType === 'standard') {
+                        basePrice = Math.abs(endStation.std - startStation.std);
+                    } else {
+                        basePrice = Math.abs(endStation.biz - startStation.biz);
+                    }
+                    
+                    if (this.query.ticketType === 'concession') {
+                        return Math.floor(basePrice * 0.5);
+                    }
+                    
+                    return basePrice;
+                },
+                // Return String for Display
+                formattedCalculatedPrice() {
+                    return this.calculatedPriceVal.toLocaleString();
+                },
+                // Discount Calculator Logic
+                discountText() {
+                    if (!this.calc.rate || this.calc.rate === 100) return '原價';
+                    if (this.calc.rate % 10 === 0) return (this.calc.rate / 10) + '折';
+                    return this.calc.rate + '折'; // e.g. 95折
+                },
+                discountResult() {
+                    if (!this.calc.amount) return 0;
+                    const rate = this.calc.rate ? this.calc.rate : 100;
+                    // Rounding logic can be adjusted if needed (Math.round, Math.floor, Math.ceil)
+                    return Math.round(this.calc.amount * (rate / 100)).toLocaleString();
+                }
+            },
+            methods: {
+                swapStations() {
+                    const temp = this.query.start;
+                    this.query.start = this.query.end;
+                    this.query.end = temp;
+                },
+                copyPriceToCalculator() {
+                    this.calc.amount = this.calculatedPriceVal;
+                }
+            },
+            mounted() {
+                // Initialize Lucide Icons
+                lucide.createIcons();
+            },
+            updated() {
+                 lucide.createIcons();
+            }
+        }).mount('#app');
+    </script>
+</body>
+</html>
