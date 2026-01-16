@@ -28,21 +28,21 @@
                         sans: ['"Noto Sans TC"', 'sans-serif'],
                     },
                     colors: {
-                        // Updated to "Deep Elegant Purple" palette
+                        // Deep Elegant Purple Palette
                         'fuji': {
-                            50: '#f4eff7', // Background base (Slightly deeper off-white)
-                            100: '#e5d5f0', // Borders/Accents (More visible)
+                            50: '#f4eff7',
+                            100: '#e5d5f0',
                             200: '#d1b1e3', 
                             300: '#b88bd1',
                             400: '#a269c2',
-                            500: '#8b49b3', // Primary accent (Rich Purple)
-                            600: '#753999', // Hover state
-                            800: '#4e1e66', // Text dark accent (Deep Plum)
+                            500: '#8b49b3',
+                            600: '#753999',
+                            800: '#4e1e66', // Deep Plum text
                         },
-                        'sumi': '#2d2d2d', // Darker Charcoal for text
+                        'sumi': '#2d2d2d',
                     },
                     boxShadow: {
-                        'soft': '0 4px 20px -2px rgba(139, 73, 179, 0.15)', // Tinted shadow with new purple
+                        'soft': '0 4px 20px -2px rgba(139, 73, 179, 0.15)',
                     }
                 }
             }
@@ -51,22 +51,19 @@
 
     <style>
         body {
-            background-color: #f4eff7; /* Match fuji-50 */
+            background-color: #f4eff7;
             color: #2d2d2d;
-            /* Deeper pattern color for better visibility */
             background-image: radial-gradient(#d1b1e3 0.8px, transparent 0.8px);
             background-size: 20px 20px;
-            /* Prevent horizontal scroll on mobile */
             overflow-x: hidden;
             -webkit-tap-highlight-color: transparent;
         }
         .glass-card {
-            background: rgba(255, 255, 255, 0.95); /* Slightly more opaque for better contrast */
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.8);
             box-shadow: 0 10px 30px -5px rgba(78, 30, 102, 0.05);
         }
-        /* Mobile-friendly select */
         select {
             appearance: none;
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%238b49b3' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
@@ -74,8 +71,6 @@
             background-repeat: no-repeat;
             background-size: 1.25em 1.25em;
         }
-        
-        /* Marquee Animation */
         .marquee-content {
             display: inline-block;
             white-space: nowrap;
@@ -85,6 +80,13 @@
             0% { transform: translateX(100vw); }
             100% { transform: translateX(-100%); }
         }
+        .animate-pulse-slow {
+            animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-slow {
+            0%, 100% { opacity: 1; }
+            50% { opacity: .7; }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-fuji-200 selection:text-fuji-800">
@@ -93,9 +95,9 @@
         
         <!-- Marquee Banner (Fixed Top) -->
         <div class="fixed top-0 left-0 w-full bg-red-600 border-b border-red-700 text-white z-50 shadow-md h-10 flex items-center overflow-hidden">
-            <div class="marquee-content flex items-center font-medium text-sm tracking-wide">
+            <div class="marquee-content flex items-center font-bold text-sm tracking-wide">
                 <i data-lucide="megaphone" class="w-4 h-4 mr-2 text-yellow-300"></i>
-                作業忙碌中，訂票及掛帳請耐心等待，嚴禁催促
+                作業忙碌中，訂票及掛帳請耐心等待，嚴禁催。
             </div>
         </div>
         
@@ -138,6 +140,7 @@
                          <i data-lucide="alert-circle" class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5"></i>
                          <p class="text-sm text-red-700 font-bold tracking-widest">【 恕不接急單 】</p>
                     </div>
+                    
                     <div class="bg-fuji-50 border border-fuji-200 rounded-xl p-3.5 flex items-start gap-3 shadow-sm">
                          <i data-lucide="info" class="w-4 h-4 text-fuji-600 flex-shrink-0 mt-0.5"></i>
                          <p class="text-sm text-fuji-800 font-bold">【 優待票須至少搭配一張全票，方可辦理訂票 】</p>
@@ -159,6 +162,7 @@
                         <div class="flex-1">
                             <span class="block text-sm text-gray-800 font-medium mb-1">疏運期間 <span class="text-xs text-gray-500 font-normal">(如國定假日、連續假期等)</span></span>
                             <div class="bg-fuji-50/80 rounded-lg p-3 border border-fuji-200 mt-1">
+                                <p class="text-xs text-fuji-600 mb-1 font-bold">※ 疏運開賣日期依台灣高鐵公告為準</p>
                                 <p class="text-sm text-fuji-700 font-bold mb-1.5 leading-relaxed">請於高鐵開賣前 3 個工作天告知，並提供需求班次順位 (至少 3 個)。</p>
                                 <div class="flex items-start gap-1.5">
                                     <i data-lucide="alert-circle" class="w-3 h-3 text-gray-500 mt-0.5 flex-shrink-0"></i>
@@ -174,7 +178,7 @@
                 </p>
 
                 <!-- Seat Rules -->
-                <div class="bg-fuji-50/50 rounded-xl p-4 border border-fuji-100">
+                <div class="bg-fuji-50/50 rounded-xl p-4 border border-fuji-100 mb-6">
                     <h3 class="text-sm font-bold text-fuji-800 mb-3 flex items-center">
                         <i data-lucide="armchair" class="w-4 h-4 mr-2 text-fuji-600"></i>
                         劃位與訂位規則
@@ -186,29 +190,29 @@
                         </li>
                     </ul>
                 </div>
-            </section>
 
-            <!-- Card 3: Booking Process Flow -->
-            <section class="glass-card rounded-2xl p-5 sm:p-6 shadow-soft transition hover:shadow-lg duration-300">
-                <div class="flex items-center mb-6">
-                    <i data-lucide="route" class="w-5 h-5 text-fuji-600 mr-3"></i>
-                    <h2 class="text-lg font-bold tracking-wide text-fuji-800">訂票作業流程</h2>
-                </div>
-                
-                <div class="relative px-2">
-                    <!-- Desktop Line -->
-                    <div class="hidden md:block absolute top-5 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-fuji-200 via-fuji-300 to-fuji-200 -z-10"></div>
+                <!-- Integrated Booking Process Flow -->
+                <div class="mt-6 pt-6 border-t-2 border-dashed border-fuji-200">
+                    <h3 class="text-sm font-bold text-fuji-800 mb-6 flex items-center justify-center sm:justify-start">
+                        <i data-lucide="route" class="w-4 h-4 mr-2 text-fuji-600"></i>
+                        訂票作業流程
+                    </h3>
                     
-                    <div class="flex flex-col md:flex-row justify-between gap-8 md:gap-0">
-                        <!-- Step Items -->
-                        <div v-for="(step, idx) in steps" :key="idx" class="flex flex-col items-center text-center group flex-1 relative">
-                            <div class="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-fuji-300 flex items-center justify-center text-fuji-600 mb-2 sm:mb-3 group-hover:border-fuji-600 group-hover:text-fuji-800 transition-all shadow-sm z-10 relative">
-                                <i :data-lucide="step.icon" class="w-5 h-5"></i>
-                                <!-- Mobile Connector Line (except last item) -->
-                                <div v-if="idx < steps.length - 1" class="md:hidden absolute h-10 w-0.5 bg-fuji-200 -bottom-10 left-1/2 -translate-x-1/2"></div>
+                    <div class="relative px-2">
+                        <!-- Desktop Line -->
+                        <div class="hidden md:block absolute top-5 left-[12%] right-[12%] h-0.5 bg-gradient-to-r from-fuji-200 via-fuji-300 to-fuji-200 -z-10"></div>
+                        
+                        <div class="flex flex-col md:flex-row justify-between gap-8 md:gap-0">
+                            <!-- Step Items -->
+                            <div v-for="(step, idx) in steps" :key="idx" class="flex flex-col items-center text-center group flex-1 relative">
+                                <div class="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-fuji-300 flex items-center justify-center text-fuji-600 mb-2 sm:mb-3 group-hover:border-fuji-600 group-hover:text-fuji-800 transition-all shadow-sm z-10 relative">
+                                    <i :data-lucide="step.icon" class="w-5 h-5"></i>
+                                    <!-- Mobile Connector Line -->
+                                    <div v-if="idx < steps.length - 1" class="md:hidden absolute h-10 w-0.5 bg-fuji-200 -bottom-10 left-1/2 -translate-x-1/2"></div>
+                                </div>
+                                <h3 class="text-sm font-bold text-gray-800 mb-1">{{ step.title }}</h3>
+                                <span class="text-[10px] text-fuji-700 bg-fuji-100 px-2 py-0.5 rounded-full font-bold">Step {{ idx + 1 }}</span>
                             </div>
-                            <h3 class="text-sm font-bold text-gray-800 mb-1">{{ step.title }}</h3>
-                            <span class="text-[10px] text-fuji-700 bg-fuji-100 px-2 py-0.5 rounded-full font-bold">Step {{ idx + 1 }}</span>
                         </div>
                     </div>
                 </div>
@@ -358,6 +362,12 @@
                 </div>
                 
                 <div class="p-5 sm:p-6 space-y-6 sm:space-y-8">
+                    <!-- Top Alert -->
+                    <div class="bg-fuji-50 border border-fuji-200 rounded-xl p-3 flex items-center justify-center gap-2 shadow-sm animate-pulse-slow">
+                         <i data-lucide="circle-dollar-sign" class="w-4 h-4 text-fuji-600"></i>
+                         <p class="text-sm text-fuji-800 font-bold tracking-widest">【 請務必主動告知掛帳金額 】</p>
+                    </div>
+
                     <!-- Query Interface -->
                     <div>
                         <!-- Station Selectors -->
@@ -460,7 +470,7 @@
                             </div>
                         </div>
 
-                        <!-- Ticket Type Info Section (Collapsible) -->
+                        <!-- Ticket Type Info Section (Collapsible - Default Open) -->
                         <div v-if="showTicketInfo" class="mt-4 bg-white/90 rounded-xl p-4 border border-fuji-200 animate-fade-in-down shadow-sm">
                             <h4 class="text-xs font-bold text-fuji-800 mb-3 flex items-center border-b border-fuji-100 pb-2">
                                 <i data-lucide="book-open" class="w-3.5 h-3.5 mr-2 text-fuji-600"></i>
@@ -502,15 +512,8 @@
                         </div>
                     </div>
 
-                    <!-- Divider -->
-                    <div class="relative flex items-center py-2">
-                        <div class="flex-grow border-t border-dashed border-fuji-300"></div>
-                        <span class="flex-shrink-0 mx-4 text-xs text-fuji-500 bg-white px-2 rounded-full border border-fuji-200 font-medium">或使用</span>
-                        <div class="flex-grow border-t border-dashed border-fuji-300"></div>
-                    </div>
-
                     <!-- Discount Calculator -->
-                    <div class="bg-gradient-to-br from-fuji-50 to-white rounded-2xl p-5 border border-fuji-200">
+                    <div class="bg-gradient-to-br from-fuji-50 to-white rounded-2xl p-5 border border-fuji-200 mt-4">
                         <div class="flex items-center justify-between mb-4">
                             <h3 class="text-sm font-bold text-fuji-800 flex items-center">
                                 <span class="w-1.5 h-1.5 bg-fuji-600 rounded-full mr-2"></span>
@@ -687,27 +690,56 @@
                         { title: '出票', icon: 'file-check' },
                         { title: '取票', icon: 'ticket' }
                     ],
-                    // Interactive Query Data
+                    // Interactive Query Data (Only used for dropdown population now)
                     stations: [
-                        { name: '台北', std: 0, biz: 0 },
-                        { name: '板橋', std: 40, biz: 260 },
-                        { name: '桃園', std: 160, biz: 440 },
-                        { name: '新竹', std: 290, biz: 640 },
-                        { name: '苗栗', std: 430, biz: 850 },
-                        { name: '台中', std: 700, biz: 1250 },
-                        { name: '彰化', std: 820, biz: 1430 },
-                        { name: '雲林', std: 930, biz: 1600 },
-                        { name: '嘉義', std: 1080, biz: 1820 },
-                        { name: '台南', std: 1350, biz: 2230 },
-                        { name: '左營', std: 1490, biz: 2440 }
+                        { name: '南港' }, 
+                        { name: '台北' },
+                        { name: '板橋' },
+                        { name: '桃園' },
+                        { name: '新竹' },
+                        { name: '苗栗' },
+                        { name: '台中' },
+                        { name: '彰化' },
+                        { name: '雲林' },
+                        { name: '嘉義' },
+                        { name: '台南' },
+                        { name: '左營' }
                     ],
+                    // Full Standard Fare Matrix (Symmetric)
+                    standardFares: {
+                        '南港': { '台北': 40, '板橋': 70, '桃園': 200, '新竹': 330, '苗栗': 480, '台中': 750, '彰化': 870, '雲林': 930, '嘉義': 1120, '台南': 1390, '左營': 1530 },
+                        '台北': { '板橋': 40, '桃園': 160, '新竹': 290, '苗栗': 430, '台中': 700, '彰化': 820, '雲林': 930, '嘉義': 1080, '台南': 1350, '左營': 1490 },
+                        '板橋': { '桃園': 130, '新竹': 260, '苗栗': 400, '台中': 670, '彰化': 790, '雲林': 900, '嘉義': 1050, '台南': 1320, '左營': 1460 },
+                        '桃園': { '新竹': 130, '苗栗': 280, '台中': 540, '彰化': 670, '雲林': 780, '嘉義': 920, '台南': 1190, '左營': 1330 },
+                        '新竹': { '苗栗': 270, '台中': 390, '彰化': 500, '雲林': 640, '嘉義': 920, '台南': 1060, '左營': 1200 },
+                        '苗栗': { '台中': 270, '彰化': 390, '雲林': 500, '嘉義': 640, '台南': 920, '左營': 1060 },
+                        '台中': { '彰化': 130, '雲林': 230, '嘉義': 380, '台南': 650, '左營': 790 },
+                        '彰化': { '雲林': 110, '嘉義': 250, '台南': 530, '左營': 680 },
+                        '雲林': { '嘉義': 150, '台南': 420, '左營': 560 },
+                        '嘉義': { '台南': 280, '左營': 410 },
+                        '台南': { '左營': 140 }
+                    },
+                    // Full Business Fare Matrix (Symmetric)
+                    businessFares: {
+                        '南港': { '台北': 260, '板橋': 310, '桃園': 500, '新竹': 700, '苗栗': 920, '台中': 1330, '彰化': 1510, '雲林': 1660, '嘉義': 1880, '台南': 2290, '左營': 2500 },
+                        '台北': { '板橋': 260, '桃園': 440, '新竹': 640, '苗栗': 850, '台中': 1250, '彰化': 1430, '雲林': 1600, '嘉義': 1820, '台南': 2230, '左營': 2440 },
+                        '板橋': { '桃園': 400, '新竹': 590, '苗栗': 800, '台中': 1210, '彰化': 1390, '雲林': 1550, '嘉義': 1780, '台南': 2180, '左營': 2390 },
+                        '桃園': { '新竹': 400, '苗栗': 620, '台中': 1010, '彰化': 1210, '雲林': 1370, '嘉義': 1580, '台南': 1990, '左營': 2200 },
+                        '新竹': { '苗栗': 410, '台中': 820, '彰化': 1010, '雲林': 1160, '嘉義': 1390, '台南': 1790, '左營': 2000 },
+                        '苗栗': { '台中': 610, '彰化': 790, '雲林': 950, '嘉義': 1160, '台南': 1580, '左營': 1790 },
+                        '台中': { '彰化': 400, '雲林': 550, '嘉義': 770, '台南': 1180, '左營': 1390 },
+                        '彰化': { '雲林': 370, '嘉義': 580, '台南': 1000, '左營': 1210 },
+                        '雲林': { '嘉義': 430, '台南': 830, '左營': 1040 },
+                        '嘉義': { '台南': 620, '左營': 820 },
+                        '台南': { '左營': 410 }
+                    },
                     query: {
                         start: '台北',
                         end: '左營',
                         carType: 'standard', // standard, business
                         ticketType: 'adult' // adult, concession
                     },
-                    showTicketInfo: false,
+                    showTicketInfo: true, // Default open
                     calc: {
                         amount: '',
                         rate: 100
@@ -723,15 +755,26 @@
                 },
                 calculatedPriceVal() {
                     if (this.query.start === this.query.end) return 0;
-                    const startStation = this.stations.find(s => s.name === this.query.start);
-                    const endStation = this.stations.find(s => s.name === this.query.end);
-                    if (!startStation || !endStation) return 0;
-
+                    
                     let basePrice = 0;
+                    const s = this.query.start;
+                    const e = this.query.end;
+                    let fareMatrix = {};
+
+                    // Select Matrix
                     if (this.query.carType === 'standard') {
-                        basePrice = Math.abs(endStation.std - startStation.std);
+                        fareMatrix = this.standardFares;
                     } else {
-                        basePrice = Math.abs(endStation.biz - startStation.biz);
+                        fareMatrix = this.businessFares;
+                    }
+
+                    // Lookup Price
+                    if (fareMatrix[s] && fareMatrix[s][e]) {
+                        basePrice = fareMatrix[s][e];
+                    } else if (fareMatrix[e] && fareMatrix[e][s]) {
+                        basePrice = fareMatrix[e][s];
+                    } else {
+                        basePrice = 0; // Error fallback
                     }
                     
                     if (this.query.ticketType === 'concession') {
