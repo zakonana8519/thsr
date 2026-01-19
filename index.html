@@ -219,7 +219,7 @@
                                     <li>提供需求班次順位 (至少 3 個)</li>
                                 </ul>
                                 <p class="text-xs text-navy-500 border-t border-gold-100 pt-2">
-                                    將於上班時間訂票作業，實際依作業送出為準，恕無法保證一定有票。
+                                    將於上班時間訂票，依作業送出為準，無法保證一定有票。
                                 </p>
                             </div>
                         </div>
@@ -242,6 +242,15 @@
                                 </div>
                                 <span class="text-xs font-bold text-navy-700">{{ step.title }}</span>
                             </div>
+                        </div>
+                        
+                        <div class="mt-4 text-center">
+                            <p class="text-sm font-bold text-navy-600 bg-navy-50 py-2 rounded border border-navy-100 mb-2">
+                                <i data-lucide="message-circle" class="w-4 h-4 inline-block mr-1 mb-0.5"></i> 請留 Slack 訊息或科威訊息
+                            </p>
+                            <p class="text-xs font-bold text-red-600">
+                                開票請於D/L前告知"可開票"，逾期系統將自動取消。
+                            </p>
                         </div>
                     </div>
 
@@ -274,7 +283,6 @@
                             <div class="flex-1">
                                 <span class="text-xs font-bold text-navy-400 uppercase block mb-1">手續費 Fee</span>
                                 <p class="text-lg font-bold text-red-700">每張 NT$ 50</p>
-                                <p class="text-xs text-navy-500">相關費用須自行負擔</p>
                             </div>
                         </div>
 
@@ -290,10 +298,51 @@
 
                         <div class="text-xs text-navy-500 space-y-1 font-medium bg-navy-50 p-3 rounded">
                             <p>• 車票須於搭乘當日使用，逾期視同廢票。</p>
-                            <p>• 若因逾時未能搭乘，請自行洽詢站務人員是否可改搭當日其他車次之自由座，恕無法辦理退票。</p>
-                            <p>• 自 114 年 11 月 10 日起「不可提早搭乘」。</p>
-                            <p>• 非高鐵因素：因航班延誤或取消等因素致無法搭乘者，恕無法改期或退票。</p>
+                            <p>• 若逾時未搭乘，請自行洽詢站務人員是否可改搭當日其他車次之自由座，恕無法辦理退票。</p>
+                            <p>• 自 114 年 11 月 10 日起旅行社代訂之票券「無法提早搭乘」僅能延後(自由座)。</p>
+                            <p>• 非高鐵因素：因航班延誤或取消等因素致無法搭乘者，無法改期或退票。</p>
                         </div>
+                    </div>
+                </section>
+
+                <!-- Useful Links -->
+                <section class="prestige-card p-6">
+                    <div class="title-line text-base">
+                        <i data-lucide="link" class="w-4 h-4 mr-2 text-gold-600"></i> 常用連結
+                    </div>
+                    <div class="space-y-3">
+                        <a href="https://www.thsrc.com.tw/" target="_blank" class="flex items-center p-3 bg-navy-50 rounded border border-navy-100 hover:bg-white hover:border-gold-500 hover:shadow-md transition-all group">
+                            <div class="bg-white p-2 rounded-full text-navy-600 border border-navy-100 mr-3 group-hover:text-gold-600 group-hover:border-gold-200">
+                                <i data-lucide="globe" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-navy-800 text-sm group-hover:text-gold-700">台灣高鐵官方網站</h4>
+                                <p class="text-xs text-navy-400">Official Website</p>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 text-navy-300 group-hover:text-gold-500"></i>
+                        </a>
+
+                        <a href="https://www.thsrc.com.tw/ArticleContent/a3b630bb-1066-4352-a1ef-58c7b4e8ef7c" target="_blank" class="flex items-center p-3 bg-navy-50 rounded border border-navy-100 hover:bg-white hover:border-gold-500 hover:shadow-md transition-all group">
+                            <div class="bg-white p-2 rounded-full text-navy-600 border border-navy-100 mr-3 group-hover:text-gold-600 group-hover:border-gold-200">
+                                <i data-lucide="calendar-clock" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-navy-800 text-sm group-hover:text-gold-700">台灣高鐵時刻表查詢</h4>
+                                <p class="text-xs text-navy-400">Timetable</p>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 text-navy-300 group-hover:text-gold-500"></i>
+                        </a>
+
+                        <a href="https://www.thsrc.com.tw/ArticleContent/58764cad-504a-486c-b1dc-f42aaa4f3552" target="_blank" class="flex items-center p-3 bg-navy-50 rounded border border-navy-100 hover:bg-white hover:border-gold-500 hover:shadow-md transition-all group">
+                            <div class="bg-white p-2 rounded-full text-navy-600 border border-navy-100 mr-3 group-hover:text-gold-600 group-hover:border-gold-200">
+                                <i data-lucide="smartphone" class="w-5 h-5"></i>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-navy-800 text-sm group-hover:text-gold-700">T-EX行動購票App 操作流程</h4>
+                                <p class="text-xs text-navy-400">App Guide</p>
+                            </div>
+                            <i data-lucide="external-link" class="w-4 h-4 text-navy-300 group-hover:text-gold-500"></i>
+                        </a>
                     </div>
                 </section>
 
@@ -307,7 +356,7 @@
                     <div class="bg-gradient-to-r from-navy-800 to-navy-900 p-6 text-white">
                         <div class="flex justify-between items-start">
                             <div>
-                                <h2 class="text-xl font-bold mb-1">票價試算工具(原價)</h2>
+                                <h2 class="text-xl font-bold mb-1">票價試算工具｜原價</h2>
                                 <p class="text-xs text-navy-200">Pricing & Discount Calculator</p>
                             </div>
                             <div class="bg-white/10 p-2 rounded">
@@ -318,10 +367,13 @@
 
                     <div class="p-6">
                         <!-- Critical Alert -->
-                        <div class="mb-6 bg-gold-100 text-gold-700 p-3 rounded flex items-center justify-center font-bold text-sm shadow-sm border border-gold-200 animate-pulse">
+                        <div class="mb-2 bg-gold-100 text-gold-700 p-3 rounded flex items-center justify-center font-bold text-sm shadow-sm border border-gold-200 animate-pulse">
                             <i data-lucide="circle-dollar-sign" class="w-4 h-4 mr-2"></i>
                             【 請務必主動告知掛帳金額 】
                         </div>
+                        <p class="text-xs text-red-500 text-center font-bold mb-6">
+                            若未告知將會掛 普通 85折 / 商務 9折 / 優待 半價 / 團體票 95折
+                        </p>
 
                         <!-- Route Selection -->
                         <div class="bg-navy-50 p-4 rounded-lg mb-6 border border-navy-100">
@@ -385,6 +437,7 @@
                                 <li><b class="text-navy-900">全票：</b>12歲以上。</li>
                                 <li><b class="text-navy-900">敬老：</b>65歲以上國民。</li>
                                 <li><b class="text-navy-900">孩童：</b>未滿12歲。115cm以下免票(限2人)。</li>
+                                <li><b class="text-navy-900">免票孩童：</b>0-5歲兒童不佔位可免費同行（每成人最多2位），需由已購票成人陪同。</li>
                                 <li><b class="text-navy-900">愛心/陪同：</b>身障證明 (註記必要陪伴者限1人)。</li>
                                 <li><b class="text-navy-900">團體：</b>11人以上，起訖/日期/車次需相同。</li>
                             </ul>
@@ -400,8 +453,8 @@
                             </h3>
                             
                             <div class="mb-4 text-[10px] bg-white border border-navy-100 p-2 rounded text-navy-500 font-medium">
-                                <span class="block mb-1">普通 <b class="text-navy-800">85折</b> / 商務 <b class="text-navy-800">9折</b> / 優待 <b class="text-navy-800">半價</b></span>
-                                <span class="text-gold-600">※ 業務請自行計算 (全票最低85折)</span>
+                                <span class="block mb-1">普通 <b class="text-navy-800">85折</b> / 商務 <b class="text-navy-800">9折</b> / 優待 <b class="text-navy-800">半價</b> / 團體票 <b class="text-navy-800">95折</b></span>
+                                <span class="text-gold-600">※ 業務利潤請自抓 (全票最低85折)</span>
                             </div>
 
                             <div class="flex items-center gap-2 mb-3">
@@ -442,18 +495,19 @@
                         <li class="flex items-center text-sm font-bold text-navy-700">
                             <span class="w-6 h-6 bg-navy-100 text-navy-600 rounded-full flex items-center justify-center text-xs mr-3">2</span>
                             <div>
-                                電子車票 <span class="text-xs text-navy-400 font-medium ml-1">(需使用高鐵App)</span>
+                                電子車票 <span class="text-xs text-navy-400 font-medium ml-1">(每位旅客皆需使用高鐵App)</span>
                             </div>
                         </li>
                         <li class="flex items-center text-sm font-bold text-navy-700">
                             <span class="w-6 h-6 bg-navy-100 text-navy-600 rounded-full flex items-center justify-center text-xs mr-3">3</span>
                             <div>
-                                超商取票 <span class="text-xs text-navy-400 font-medium ml-1">(手續費由旅客負擔)</span>
+                                超商取票 <span class="text-xs text-navy-400 font-medium ml-1">(手續費自行負擔)</span>
                             </div>
                         </li>
                     </ul>
-                    <div class="mt-4 text-xs font-bold text-navy-500 bg-navy-50 p-2 rounded text-center border border-navy-100">
-                        ※ 同一筆訂位代號僅能一種取票方式
+                    <div class="mt-4 text-xs font-bold text-navy-500 bg-navy-50 p-3 rounded text-center border border-navy-100 space-y-1">
+                        <p>※ 同一筆訂位代號僅能一種取票方式</p>
+                        <p class="text-red-600">※ 旅行社代售之高鐵票無法至高鐵站取票</p>
                     </div>
                 </section>
 
@@ -465,21 +519,21 @@
                     <div class="flex flex-wrap gap-2 mb-4">
                         <span class="text-xs font-bold text-navy-600 bg-white border border-navy-200 px-2 py-1 rounded">日期</span>
                         <span class="text-xs font-bold text-navy-600 bg-white border border-navy-200 px-2 py-1 rounded">起訖站</span>
-                        <span class="text-xs font-bold text-navy-600 bg-white border border-navy-200 px-2 py-1 rounded">班次</span>
-                        <span class="text-xs font-bold text-navy-600 bg-white border border-navy-200 px-2 py-1 rounded">張數</span>
+                        <span class="text-xs font-bold text-navy-600 bg-white border border-navy-200 px-2 py-1 rounded">班次與時間</span>
+                        <span class="text-xs font-bold text-navy-600 bg-white border border-navy-200 px-2 py-1 rounded">票種與張數</span>
                     </div>
                     <div class="space-y-2 text-xs text-navy-600">
-                        <div class="flex justify-between items-center border-b border-navy-50 pb-2">
-                            <span class="font-bold text-navy-900">全票</span>
-                            <span>姓名、身分證字號、出生年月日</span>
+                        <div class="flex justify-between items-center gap-12 border-b border-navy-50 pb-2">
+                            <span class="font-bold text-navy-900 whitespace-nowrap">全票</span>
+                            <span class="text-right">姓名、身分證字號、出生年月日</span>
                         </div>
-                        <div class="flex justify-between items-center border-b border-navy-50 pb-2">
-                            <span class="font-bold text-navy-900">優待 (孩童/敬老)</span>
-                            <span>姓名、身分證字號、出生年月日</span>
+                        <div class="flex justify-between items-center gap-12 border-b border-navy-50 pb-2">
+                            <span class="font-bold text-navy-900 whitespace-nowrap">優待 (孩童/敬老)</span>
+                            <span class="text-right">姓名、身分證字號、出生年月日</span>
                         </div>
-                        <div class="flex justify-between items-center">
-                            <span class="font-bold text-navy-900">優待 (愛心/陪同)</span>
-                            <span>姓名、身分證字號、出生年月日、身障手冊正反面影本</span>
+                        <div class="flex justify-between items-center gap-12">
+                            <span class="font-bold text-navy-900 whitespace-nowrap">優待 (愛心/陪同)</span>
+                            <span class="text-right">姓名、身分證字號、出生年月日、身障手冊正反面影本</span>
                         </div>
                     </div>
                 </section>
@@ -535,7 +589,7 @@
                         { label: '團體訂票', time: '須於搭乘日前 5 個工作天提出申請' }
                     ],
                     seatRules: [
-                        '座位皆由電腦自動劃位，恕無法指定座位，亦無法保證同行者可安排相鄰座位。',
+                        '座位皆由電腦自動劃位，恕無法指定座位，亦無法保證同行者為相鄰座位。',
                         '一筆訂位代號最多 10 位旅客。',
                         '不同起訖點為獨立一個訂位代號。'
                     ],
@@ -618,15 +672,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
